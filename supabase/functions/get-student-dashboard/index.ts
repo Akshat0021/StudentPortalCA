@@ -66,7 +66,7 @@ serve(async (req) => {
     const [attendanceRes, holidaysRes] = await Promise.all([
       supabase.from('attendance')
         // CHANGE THIS LINE: Use the table name 'schedules', not the column 'schedule_id'
-        .select('*, schedules(course_id)')
+        .select('*, schedules(*)')
         .eq('student_id', studentId),
       
       supabase.from('holidays')
