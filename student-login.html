@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Portal - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-indigo-100 to-white">
+
+  <nav class="sticky top-0 z-50 border-b border-gray-200/50"
+    style="backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.1);">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div
+            class="w-8 h-8 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <a href="/"
+            class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">AttendanceFlow</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="flex items-center justify-center min-h-[calc(100vh-80px)]">
+    <div class="w-full max-w-md px-6 py-12 rounded-3xl shadow-2xl glass-effect">
+      <div class="flex flex-col items-center mb-8">
+        <div
+          class="w-16 h-16 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+        </div>
+        <h1 class="mt-5 text-3xl font-extrabold text-gray-900 tracking-tight">Student Portal</h1>
+        <p class="mt-2 text-sm text-gray-500">View your attendance dashboard</p>
+      </div>
+
+      <form id="student-login-form" class="space-y-6">
+        
+        <div>
+          <label for="college_id" class="block text-sm font-medium text-gray-700">Select Your College</label>
+          <div class="mt-2 relative">
+            <select id="college_id" name="college_id" required 
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 mt-1 focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition appearance-none bg-white">
+              <option value="" disabled selected>Loading colleges...</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="roll_number" class="block text-sm font-medium text-gray-700">Student Roll Number</label>
+          <div class="mt-2 relative">
+            <input type="text" id="roll_number" name="roll_number" required 
+              placeholder="Select your college first"
+              disabled
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 mt-1 focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition disabled:bg-gray-100 disabled:cursor-not-allowed" />
+          </div>
+        </div>
+
+        <div id="error-message" class="hidden p-3 bg-red-100 text-red-700 rounded-lg text-sm"></div>
+
+        <button type="submit" id="submit-btn"
+          class="block text-center w-full py-3 px-6 rounded-lg bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold text-lg shadow-md hover:from-indigo-600 hover:to-blue-600 hover:shadow-lg transition disabled:opacity-50">
+          Enter
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scripts/student-login.js"></script>
+</body>
+
+</html>
