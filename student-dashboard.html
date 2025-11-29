@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Student Dashboard - AttendanceFlow</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .glass-card {
@@ -12,78 +11,80 @@
       background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
+    /* Smooth scrolling for mobile tables */
+    .smooth-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
   </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pb-10">
 
   <div class="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div
-            class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <div class="container mx-auto px-4 py-3 md:py-4"> <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+            <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
           </div>
-          <div>
-            <h1 class="text-3xl font-black text-gray-800">Student Dashboard</h1>
-            <p id="student-name-display" class="text-gray-600 font-medium">Loading...</p>
+          <div class="min-w-0"> <h1 class="text-xl md:text-3xl font-black text-gray-800 truncate">Dashboard</h1>
+            <p id="student-name-display" class="text-sm md:text-base text-gray-600 font-medium truncate">Loading...</p>
           </div>
         </div>
-        <button id="logout-btn"
-          class="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all">
-          <span class="font-medium">Logout</span>
+        <button id="logout-btn" class="flex-shrink-0 px-3 py-2 md:px-4 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all text-sm md:text-base font-medium">
+          Logout
         </button>
       </div>
     </div>
   </div>
 
-  <div class="container mx-auto px-6 py-8">
+  <div class="container mx-auto px-4 py-6 md:py-8">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="glass-card rounded-2xl p-6 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+      <div class="glass-card rounded-2xl p-5 md:p-6 text-center">
         <div class="text-sm font-medium text-gray-600 mb-1">Overall Attendance (All Time)</div>
-        <div class="text-5xl font-bold text-indigo-600" id="overall-percentage">--%</div>
+        <div class="text-4xl md:text-5xl font-bold text-indigo-600" id="overall-percentage">--%</div>
       </div>
-      <div class="glass-card rounded-2xl p-6 text-center">
+      <div class="glass-card rounded-2xl p-5 md:p-6 text-center">
         <div class="text-sm font-medium text-gray-600 mb-1">Overall Attendance (This Month)</div>
-        <div class="text-5xl font-bold text-blue-600" id="monthly-overall-percentage">--%</div>
+        <div class="text-4xl md:text-5xl font-bold text-blue-600" id="monthly-overall-percentage">--%</div>
       </div>
     </div>
 
-    <div class="glass-card rounded-3xl shadow-xl p-6 mb-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Course Attendance Breakdown</h2>
-        <div id="loading-courses" class="text-center py-8 text-gray-500">Loading course data...</div>
-        <div classs="overflow-x-auto">
-            <table class="w-full hidden" id="courses-table">
+    <div class="glass-card rounded-3xl shadow-xl p-5 md:p-6 mb-6 md:mb-8">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Course Breakdown</h2>
+        <div id="loading-courses" class="text-center py-8 text-gray-500 text-sm">Loading course data...</div>
+        
+        <div class="overflow-x-auto smooth-scroll">
+            <table class="w-full hidden text-sm md:text-base" id="courses-table">
                 <thead>
                     <tr class="border-b-2 border-gray-200">
-                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Course</th>
-                        <th class="text-center py-3 px-4 font-semibold text-gray-700">All Time</th>
-                        <th class="text-center py-3 px-4 font-semibold text-gray-700">This Month</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-700 whitespace-nowrap">Course</th>
+                        <th class="text-center py-3 px-4 font-semibold text-gray-700 whitespace-nowrap">All Time</th>
+                        <th class="text-center py-3 px-4 font-semibold text-gray-700 whitespace-nowrap">This Month</th>
                     </tr>
                 </thead>
                 <tbody id="course-breakdown-body">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
 
-    <div class="glass-card rounded-3xl shadow-xl p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">This Week's Schedule</h2>
-      <div id="loading-schedule" class="text-center py-8 text-gray-500">Loading schedule...</div>
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-max hidden" id="schedule-table">
+    <div class="glass-card rounded-3xl shadow-xl p-5 md:p-6">
+      <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">This Week's Schedule</h2>
+      <div id="loading-schedule" class="text-center py-8 text-gray-500 text-sm">Loading schedule...</div>
+      
+      <div class="overflow-x-auto smooth-scroll">
+        <table class="w-full min-w-max hidden text-sm md:text-base" id="schedule-table">
           <thead class="bg-gray-50 rounded-lg">
             <tr>
-              <th class="text-left py-3 px-4 font-semibold text-gray-600">Day</th>
+              <th class="text-left py-3 px-4 font-semibold text-gray-600 w-1/4">Day</th>
               <th class="text-left py-3 px-4 font-semibold text-gray-600">Classes</th>
             </tr>
           </thead>
           <tbody id="schedule-body">
-            </tbody>
+          </tbody>
         </table>
       </div>
     </div>
@@ -93,5 +94,4 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="scripts/student-dashboard.js"></script>
 </body>
-
 </html>
