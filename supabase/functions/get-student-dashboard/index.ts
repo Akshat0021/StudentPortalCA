@@ -62,14 +62,11 @@ serve(async (req) => {
       schedulesData = schedules || []
     }
 
-    // 3. Fetch other data in parallel
+   // 3. Fetch other data in parallel
     const [attendanceRes, holidaysRes] = await Promise.all([
-      // =========================================================
-      // ### THIS IS THE LINE I FIXED ###
-      // It now correctly uses your `schedule_id` column to join
-      // =========================================================
       supabase.from('attendance')
-        .select('*, schedules:schedule_id(course_id)')
+        // CHANGE THIS LINE: Use the table name 'schedules', not the column 'schedule_id'
+        .select('*, schedules(course_id)')
         .eq('student_id', studentId),
       
       supabase.from('holidays')
