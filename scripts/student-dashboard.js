@@ -227,7 +227,7 @@ function displayWeeklyPlanner(scheduleGroups, holidays) {
         }
         
         row.innerHTML = `
-            <td class="py-3 px-4 font-medium">${dayName} <span class="text-sm text-gray-500">${i === 0 ? '(Today)' : ''}</span></td>
+            <td class="py-3 px-4 font-medium">${dayName} <span class="text-sm text-gray-500"><br>${i === 0 ? '(Today)' : ''}</span></td>
             <td class="py-3 px-4">${classHtml}</td>
         `;
         tbody.appendChild(row);
